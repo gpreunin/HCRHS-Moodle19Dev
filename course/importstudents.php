@@ -4,6 +4,7 @@
 
     require_once("../config.php");
     require_once("lib.php");
+    require_once("sirsteacherlib.php");
 
     define("MAX_COURSES_PER_PAGE", 1000);
 
@@ -26,6 +27,14 @@
     require_login($course->id);
     $context = get_context_instance(CONTEXT_COURSE, $course->id);
     require_capability('moodle/course:managemetacourse', $context);
+
+
+    $sirs_teacher_course_list = get_sirs_teacher_courses($USER->id, 12);
+
+     //   if(empty($sirs_teacher_course_list)){
+     //    debugging('sirs_teacher_course_list is empty');
+     //   }
+
 
     if (!$course->metacourse) {
         redirect("$CFG->wwwroot/course/view.php?id=$course->id");
@@ -53,7 +62,9 @@
     print_heading(get_string('childcourses'));
 
     if (!$frm = data_submitted()) {
-        $note = get_string("importmetacoursenote");
+        // gwp April 4, 2011
+        //$note = get_string("importmetacoursenote");
+        $note = "Use this form to enroll students from your SIRS class section(s) into your Virtual Classroom";
         print_simple_box($note, "center", "50%");
 
 /// A form was submitted so process the input
@@ -93,7 +104,9 @@
 
 /// Get search results excluding any users already in this course
     if (($searchtext != '') and $previoussearch and confirm_sesskey()) {
-        if ($searchcourses = get_courses_search(explode(" ",$searchtext),'fullname ASC',0,99999,$numcourses)) {
+  
+     if(empty($sirs_teacher_course_list)){
+         if($searchcourses = get_courses_search(explode(" ",$searchtext),'fullname ASC',0,99999,$numcourses)){
             foreach ($searchcourses as $tmp) {
                 if (array_key_exists($tmp->id,$alreadycourses)) {
                     unset($searchcourses[$tmp->id]);
@@ -107,17 +120,54 @@
             }
             $numcourses = count($searchcourses);
         }
+     }
+     else{
+
+         $searchcourses = get_enrolled_courses_search(explode(" ",$searchtext),'fullname ASC',0,99999,$numcourses,$sirs_teacher_course_list);
+
+         if($searchcourses = get_enrolled_courses_search(explode(" ",$searchtext),'fullname ASC',0,99999,$numcourses,$sirs_teacher_course_list)){
+
+            foreach ($searchcourses as $tmp) {
+ 
+
+                if (array_key_exists($tmp->id,$alreadycourses)) {
+                    unset($searchcourses[$tmp->id]);
+                }
+                if (!empty($tmp->metacourse)) {
+                    unset($searchcourses[$tmp->id]);
+                }
+            }
+            if (array_key_exists($course->id,$searchcourses)) {
+                unset($searchcourses[$course->id]);
+            }
+            $numcourses = count($searchcourses);
+        }
+     }
     }
 
-/// If no search results then get potential students for this course excluding users already in course
+    /// If no search results then get potential students for this course excluding users already in course
     if (empty($searchcourses)) {
-        $numcourses = count_courses_notin_metacourse($course->id);
 
-        if ($numcourses > 0 and $numcourses <= MAX_COURSES_PER_PAGE) {
+      $numcourses=0;
+
+      if(empty($sirs_teacher_course_list)){
+        $numcourses = count_courses_notin_metacourse($course->id);
+      }
+      else{
+        $numcourses = count_courses_notin_sirsteacher_metacourse($course->id,$sirs_teacher_course_list);
+      }
+
+      if ($numcourses > 0 and $numcourses <= MAX_COURSES_PER_PAGE) {
+          if(empty($sirs_teacher_course_list)){
             $courses = get_courses_notin_metacourse($course->id);
-        } else {
-            $courses = array();
-        }
+          }
+          else{
+            $courses = get_courses_notin_sirsteacher_metacourse($course->id,$sirs_teacher_course_list);
+          }
+      } else {
+          $courses = array();
+      }
+
     }
 
     print_simple_box_start("center");
