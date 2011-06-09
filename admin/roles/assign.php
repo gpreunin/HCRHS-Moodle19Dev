@@ -290,7 +290,8 @@
             $selectsql = "";
         }
 
-        if ($context->contextlevel > CONTEXT_COURSE && !is_inside_frontpage($context)) { // mod or block (or group?)
+        if (!empty($searchtext) || $usercount < MAX_USERS_PER_PAGE) {
+            if ($context->contextlevel > CONTEXT_COURSE && !is_inside_frontpage($context)) { // mod or block (or group?)
 
             /************************************************************************
              *                                                                      *
@@ -373,6 +374,7 @@
                                                 ORDER BY lastname ASC, firstname ASC');
 
             $usercount = $availableusers->_numOfRows;         
+            }
         }
 
         echo '<div class="selector">';
