@@ -1,4 +1,4 @@
-<?php // $Id: cron.php,v 1.1 2010/05/24 12:54:05 gpreunin Exp $
+<?php // $Id$
 
 /// This script looks through all the module directories for cron.php files
 /// and runs them.  These files can contain cleanup functions, email functions
