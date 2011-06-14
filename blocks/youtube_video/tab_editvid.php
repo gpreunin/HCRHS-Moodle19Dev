@@ -29,9 +29,9 @@
 	$table->tablealign = 'left';
 	$table->width = '*';
 
-	$table->data[] = array(get_string('edit_title', 'block_youtube_video'), '<input type="text" name="title" value="' . (!$video ? '' : $video->title) . '" maxlength="64" />');
-	$table->data[] = array(get_string('description'), '<textarea name="description" rows="6" cols="23">' . (!$video ? '' : $video->description) . '</textarea>');
-	$table->data[] = array('URL', '<input type="text" name="url" value="' . (!$video ? '' : $video->url) . '" maxlength="255" />');
+	$table->data[] = array(get_string('edit_title', 'block_youtube_video'), '<input type="text" name="title" size="64" value="' . (!$video ? '' : $video->title) . '" maxlength="64" />');
+	$table->data[] = array(get_string('description'), '<textarea name="description" rows="6" cols="49">' . (!$video ? '' : $video->description) . '</textarea>');
+	$table->data[] = array('URL', '<input type="text" name="url" size="100" value="' . (!$video ? '' : $video->url) . '" maxlength="255" />');
 	$table->data[] = array(get_string('edit_shared', 'block_youtube_video'), choose_from_menu_yesno('shared', (!$video ? 0 : $video->shared), '', true));
 	$table->data[] = array('&nbsp;', '<input type="submit" value="' . get_string('savechanges') . '" />');
 

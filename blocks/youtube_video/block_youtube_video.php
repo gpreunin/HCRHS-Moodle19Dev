@@ -33,9 +33,15 @@
 		}
 
 		function get_video() {
+                       
+                        if(!empty($this->config->pls)){
 			$playlist = explode(';', $this->config->pls);
 			array_pop($playlist);
 			return get_record('block_youtube_video', 'id', $playlist[rand() % count($playlist)]);
+                        }
+                        else{
+                          return;  
+                        }
 		}
 
 		function get_content() {

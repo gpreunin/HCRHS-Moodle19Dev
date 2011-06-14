@@ -71,7 +71,10 @@ function selectAll(theSel)
 
 	$videos_pl = array();
 	$videos_av = array();
-	$form_pl   = (!$this->config->pls ? array() : explode(';', $this->config->pls));
+        $form_pl = array();
+        if(!empty($this->config->pls)){         
+          $form_pl = explode(';', $this->config->pls);
+        }
 
 	echo('<input type="hidden" name="pls" id="pls" value="' . implode(';', $form_pl) . '" />');
 
@@ -87,14 +90,14 @@ function selectAll(theSel)
 	$table->tablealign = 'left';
 	$table->width = '*';
 
-	$select_playlist = '<select style="width:175px" name="playlist" id="playlist" size="15" multiple>';
+	$select_playlist = '<select style="width:350px" name="playlist" id="playlist" size="15" multiple>';
 	foreach ($videos_pl as $video) {
 		$share = ($video->shared == 1 && $video->courseid != $this->instance->pageid ? ' (*)' : '');
 		$select_playlist .= '<option value="' . $video->id . '">' . $video->title . $share . '</option>';
 	}
 	$select_playlist .= '</select>';
 
-	$select_avail = '<select style="width:175px" name="available" id="available" size="15" multiple>';
+	$select_avail = '<select style="width:350px" name="available" id="available" size="15" multiple>';
 	foreach ($videos_av as $video) {
 		$share = ($video->shared == 1 && $video->courseid != $this->instance->pageid ? ' (*)' : '');
 		$select_avail .= '<option value="' . $video->id . '">' . $video->title . $share . '</option>';

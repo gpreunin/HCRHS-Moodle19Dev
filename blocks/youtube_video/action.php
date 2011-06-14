@@ -35,7 +35,14 @@
 			$video->url = $url;
 			$video->shared = $shared;
 			update_record('block_youtube_video', $video);
+		        $redirurl .= 'configblock';                        
 		} else {
+
+                    if( empty($title) and empty($url) ){
+                    $redirurl .= 'editvid' ;
+                    }
+                    else{
+                    
 			$video = new Object();
 			$video->courseid = $cid;
 			$video->title = $title;
@@ -43,8 +50,9 @@
 			$video->url = $url;
 			$video->shared = $shared;
 			insert_record('block_youtube_video', $video);
+                        $redirurl .= 'configblock';
+                   }
 		}
-		$redirurl .= 'configblock';
 		break;
 	   case 'delete' : // Remove video entry
 		delete_records('block_youtube_video', 'id', $vid, 'courseid', $cid);
