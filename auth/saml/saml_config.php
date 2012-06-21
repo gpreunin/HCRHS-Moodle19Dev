@@ -1,0 +1,1 @@
+{"samllib":"\/usr\/local\/confia\/ssp-sp\/simplesamlphp\/lib","sp_source":"saml","dosinglelogout":"on"}
