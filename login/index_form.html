@@ -52,9 +52,10 @@ if (in_array('saml', $authsequence)){
 </div>
 </div>
 
-<p align="center">Not a HCRHS staff member or student?<br/>  
-    <a id="extUserDisplayText" href="javascript:unhide('externalUserForm','extUserDisplayText');"><u>Display</u></a> 
-    login form.</p>
+<p align="center">For those who do not have an HCRHS network login<br/>  
+                  (Email not ending in hcrhs.k12.nj.us or hcrhs.org)<br/>
+    <a id="extUserDisplayText" href="javascript:unhide('externalUserForm','extUserDisplayText');">
+        <u>Click here to display</u></a> login form.</p>
 <div id="externalUserForm" class="hidden">
 <div class="loginbox clearfix: <?php echo $columns ?>">
   <div class="loginpanel">
