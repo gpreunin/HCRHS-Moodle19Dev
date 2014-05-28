@@ -270,7 +270,7 @@
     /// Get all existing participants in this context.
         // Why is this not done with get_users???
 
-        if (!$contextusers = get_role_users($roleid, $context, false, 'u.id, u.firstname, u.lastname, u.email, ra.hidden')) {
+        if (!$contextusers = get_role_users($roleid, $context, false, 'u.id, u.firstname, u.lastname, u.email,u.idnumber, ra.hidden')) {
             $contextusers = array();
         }
 
@@ -284,7 +284,7 @@
             $LIKE      = sql_ilike();
             $FULLNAME  = sql_fullname();
 
-            $selectsql = " AND ($FULLNAME $LIKE '%$searchtext%' OR email $LIKE '%$searchtext%') ";
+            $selectsql = " AND ($FULLNAME $LIKE '%$searchtext%' OR email $LIKE '%$searchtext%' OR idnumber $LIKE '%$searchtext%') ";
             $select  .= $selectsql;
         } else {
             $selectsql = "";
