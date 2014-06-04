@@ -3,7 +3,8 @@
 
 
     require_once("../../config.php");
-    require_once("lib.php");
+   require_once ($CFG->dirroot.'/mod/questionnaire/locallib.php');
+   require_once($CFG->dirroot.'/mod/questionnaire/lib.php');
 
     $id = required_param('id', PARAM_INT);
 

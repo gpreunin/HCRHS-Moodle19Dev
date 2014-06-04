@@ -10,9 +10,9 @@
 		
 		<?php $test = '<li><a class="qmparent" href="'.$CFG->wwwroot.'/my">myMoodle</a>'; echo $test; ?></li>
 <!--		<li><a class="qmparent" href="http://webmail.hcrhs.k12.nj.us/" target="_blank">Email</a></li> -->
-		<li><a class="qmparent" href="http://www.hcrhs.k12.nj.us/" target="_blank">School Site</a></li>
+		<li><a class="qmparent" href="http://www.hcrhs.org/" target="_blank">hcrhs.org </a></li>
 		<li><a class="qmparent" href="http://webmail.hcrhs.k12.nj.us/" target="_blank">E-mail</a></li>
-		<li><a class="qmparent" href="http://portal.hcrhs.k12.nj.us/course/view.php?id=13464">OSOB</a></li>
+<!--		<li><a class="qmparent" href="http://portal.hcrhs.k12.nj.us/course/view.php?id=13464">OSOB</a></li> -->
 <!--		<li><span class="qmdivider qmdividerx" ></span></li>
                 <li><a href="javascript:void();">Staff Directory</a>
         	<li><a class="qmparent" href="javascript:void(0);">Departments</a>

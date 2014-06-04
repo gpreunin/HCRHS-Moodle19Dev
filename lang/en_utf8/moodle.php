@@ -1720,7 +1720,5 @@ $string['chooseauthmethod'] = 'Choose authentication plugin';
 $string['nocourses'] = 'No courses';
 $string['requestedcourses'] = 'Requested courses';
 
-$string['externalUserLogin']= 'Login form for external HCRHS users';
-$string['externalUserHelp']= 'Call 908-284-4444 to request a Moodle <br/>login username and password. 
-    <br/>___________________________________________';
+$string['externalUserLogin']= 'Login form for external HCRHS coaches';
 ?>
